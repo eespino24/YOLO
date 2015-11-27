@@ -1,0 +1,61 @@
+#Make an Image move one space with arrow keys in python / pygame
+#http://stackoverflow.com/questions/20052067/make-an-image-move-one-space-with-arrow-keys-in-python-pygame
+
+import pygame
+import random
+pygame.init()
+
+#colors
+black = (0, 0, 0)
+white = (255, 255, 255)
+green = (0, 100, 0)
+red = (255, 0, 0)
+
+
+size = [1000, 500]
+screen = pygame.display.set_mode(size)
+
+pygame.display.set_caption("Tony's newest game attempt")
+
+
+#boolean for while loop
+done = False
+
+#create clock 
+clock = pygame.time.Clock()
+
+#declare font
+font = pygame.font.Font(None, 25)
+
+player_one = pygame.image.load("player_one.png").convert()
+player_one.set_colorkey(white)
+
+player_two = pygame.image.load("player_two.png").convert()
+player_two.set_colorkey(white)
+
+while done == False:
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            done = True             
+
+
+    screen.fill(green)
+
+    for x in range(60,940,35):
+        pygame.draw.line(screen, white, [x, 0], [x, 500], 1)
+
+
+    score = 0
+    text = font.render("Score:" +str(score), True, black)
+
+    screen.blit(text, [0, 0])
+    screen.blit(player_one, [940, 240])
+
+    screen.blit(player_two, [60, 240])
+
+
+    pygame.display.flip()
+
+    clock.tick(20)
+
+pygame.quit()
